@@ -28,41 +28,48 @@ public class Archivos {
      * 
      * leer el archivo e imprimirlo
      */
-    
+    public static InputStreamReader leer =new InputStreamReader(System.in);
+    public static BufferedReader in = new BufferedReader(leer);
+    public static BufferedWriter bw;
     
     public static void main(String[] args) throws IOException {
-        InputStreamReader leer =new InputStreamReader(System.in);
-        BufferedReader in = new BufferedReader(leer);
         
+        String cadena;
         
         String ruta="C:\\Users\\Abel\\Documents\\NetBeansProjects\\TALLER JAVAEE\\Archivos\\holaMundo.txt";
         
         File archivo= new File(ruta);
-        BufferedWriter bw;
-        if (archivo.exists()){
-            bw = new BufferedWriter(new FileWriter(archivo));
-        }else{
-            bw=new BufferedWriter(new FileWriter(archivo));
-        }
+        //compruebo si es un archivo
         if (archivo.isDirectory()){
             System.out.println("Es un directorio");
         }else{
             System.out.println("No es un directorio");
         }
         
+        //verifico si existe
+        if (archivo.exists()){
+            bw = new BufferedWriter(new FileWriter(archivo));
+        }else{
+            bw=new BufferedWriter(new FileWriter(archivo));
+        }
+        
+        //Entrada de texto
         System.out.println("Ingresa el texto a escribir en el archivo:");
         String texto;
         texto = in.readLine();
         
+        //Escribo y cieero el buffer
         bw.write(texto);
         bw.close();
         
-        String cadena;
+        //Leo el archivo
         FileReader f=new FileReader (archivo);
         BufferedReader BF=new BufferedReader(f);
+        //imprimo mientras tenga algo
         while((cadena = BF.readLine())!=null) {
           System.out.println(cadena);
         }
+        //cierro el buffer
         BF.close();
     }
     
